@@ -15,7 +15,7 @@ namespace MapsSample.ViewModels
             get { return _pushpins; }
             set { Set(ref _pushpins, value); }
         }
-
+         
         private double _zoomlevel;
         public double ZoomLevel
         {
