@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="MapsSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapsSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:maps1="using:WpWinNl.Maps"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <maps:MapControl Grid.Row="0" ZoomLevel="{Binding Path=ZoomLevel, Mode=TwoWay}" Center="{Binding Path=Center}" x:Name="Map">
+            <interactivity:Interaction.Behaviors>
+                <maps1:MapShapeDrawBehavior LayerName="Points" ItemsSource="{Binding Path=Pushpins}" PathPropertyName="Point">
+                    <maps1:MapShapeDrawBehavior.EventToHandlerMappers>
+                        <maps1:EventToHandlerMapper EventName="MapElementClick" CommandName="SelectCommand" />
+                    </maps1:MapShapeDrawBehavior.EventToHandlerMappers>
+                    <maps1:MapShapeDrawBehavior.ShapeDrawer>
+                        <maps1:MapIconDrawer ImageUri="ms-appx:///Assets/MicrosoftLogo.png" CollisionBehaviorDesired="RemainVisible" />
+                    </maps1:MapShapeDrawBehavior.ShapeDrawer>
+                </maps1:MapShapeDrawBehavior>
+            </interactivity:Interaction.Behaviors>
+        </maps:MapControl>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Points" Icon="MapPin" Command="{Binding Path=ShowPushpins}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
